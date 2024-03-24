@@ -1,6 +1,6 @@
 # Booking Website - Frontend
 
-This repository contains the frontend code for a booking website, built with React and Tailwind CSS.
+This repository contains the frontend code for a responsive booking website, built with React and Tailwind CSS.
 
 ## Setup
 
