@@ -46,19 +46,18 @@ function FormRegister() {
 
     const formErrors = validateForm(formData);
     if (Object.keys(formErrors).length === 0) {
-      setIsLoading(true);
-      const result = await register(formData);
+      try {
+        setIsLoading(true);
+        await register(formData);
 
-      if (result?.error) {
         setIsLoading(false);
-        showModalFail("Register failed", result?.error);
-        return false;
+        setEmtyData();
+        showModalSuccess("Your account has been created.");
+        setTimeout(() => navigate("/login"), 3000);
+      } catch (error) {
+        setIsLoading(false);
+        showModalFail("Register failed", error.message);
       }
-
-      setIsLoading(false);
-      setEmtyData();
-      showModalSuccess("Your account has been created.");
-      setTimeout(() => navigate("/login"), 3000);
     } else {
       setErrorMessage(formErrors);
     }

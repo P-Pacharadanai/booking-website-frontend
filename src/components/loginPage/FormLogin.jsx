@@ -28,17 +28,16 @@ function FormLogin() {
 
     const formErrors = validateForm(formData);
     if (Object.keys(formErrors).length === 0) {
-      setIsLoading(true);
-      const result = await login(formData);
+      try {
+        setIsLoading(true);
+        await login(formData);
 
-      if (result?.error) {
         setIsLoading(false);
-        setErrorMessage({ server: result?.error });
-        return false;
+        setErrorMessage({});
+      } catch (error) {
+        setIsLoading(false);
+        setErrorMessage({ server: error.message });
       }
-
-      setIsLoading(false);
-      setErrorMessage({});
     } else {
       setErrorMessage(formErrors);
     }

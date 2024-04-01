@@ -16,11 +16,11 @@ function AuthProvider(props) {
       const errorMessage = error?.response?.data?.message;
 
       if (errorStatus === 409) {
-        return { error: errorMessage };
+        throw new Error(errorMessage);
       } else if (errorStatus === 500) {
-        return { error: "An error occurred on the server." };
+        throw new Error("An error occurred on the server.");
       } else {
-        return { error: "Sorry, please try again." };
+        throw new Error("Sorry, please try again.");
       }
     }
   };
@@ -34,9 +34,9 @@ function AuthProvider(props) {
     } catch (error) {
       const errorStatus = error?.request?.status;
       if (errorStatus === 400) {
-        return { error: "Invalid email or password." };
+        throw new Error("Invalid email or password.");
       } else {
-        return { error: "An error occurred on the server." };
+        throw new Error("An error occurred on the server.");
       }
     }
   };
